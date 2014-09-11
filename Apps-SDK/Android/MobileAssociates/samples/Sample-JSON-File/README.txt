@@ -1,0 +1,1 @@
+This is a sample JSON file that enlists products from available product categories.  You can use this as a reference to create a JSON file specific to your app or use this JSON file for you testing. 

@@ -1,0 +1,32 @@
+Release Notes - Mobile Associates API
+
+SDK Version: 1.0.54.0
+App Tester Version: 1.0.27.0
+Date: 10/07/2013
+
+Contents
+
+* Mobile Associates API jar - amazon-mobile-associates-1.0.54.0.jar (included in the zip)
+* Amazon App Tester (available from Amazon Appstore for Android)
+* API Documentation (available on distribution portal)
+
+API Modifications
+
+* PurchaseToken is removed from the Receipt class.
+
+Bug Fixes
+
+* [Fixed] MP3 asins are not getting attributed due to redirection
+
+Known Issues
+
+* On Kindle, more than 1/2 of the price tab column may disappears off the side of the window on mp3 product detail page. 
+* Incorrect ASIN Rating for MP3
+* For In-App detail page, on Kindle (Tate) user is prompted for password on the Product Detail Page. After login, user is directed to the MP3 home page in a browsser. 
+* For direct link and search API, on Kindle user is taken to Anywhere page for specific item. This page shows item detail but does not show option to buy the item.
+* For Android 2.x devices, there is no In-App Detail Page and user is taken directly to specific item on Product Detail Page store where they can buy this item.
+
+How to get Amazon App Tester
+
+Please follow instructions at https://developer.amazon.com/sdk/in-app-shopping/testing.html
+

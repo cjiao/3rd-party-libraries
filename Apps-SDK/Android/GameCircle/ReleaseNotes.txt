@@ -1,0 +1,27 @@
+Release Notes
+Amazon GameCircle Unity Plugin Version 2.2.0
+Amazon GameCircle Android SDK Version 2.2.0
+Amazon GameCircle iOS SDK Version 3.1.0
+Amazon Insights Android SDK Version 2.1.10
+Amazon Insights iOS SDK Version 2.1.6
+
+PLATFORM CHANGES
+--------------
+Adds modal dialogs on tablet devices (Android only)
+Adds beachball softkey support (Kindle Fire devices only)
+
+API ADDED
+---------
+Integrates the latest Insights SDK
+showSignInPage (java.lang.Object... userData)
+
+UI IMPROVEMENTS
+-----------
+Adds "X Hidden achievements for this game" at the bottom of an achievements page
+Adds a non-scrolling player name anchor in leaderboards
+Enables leaderboards formatted with commas to improve readability
+Enables font scaling for improved UX on tablets
+
+MISCELLANEOUS
+-----------
+Adds specific email addresses based on locale for help and feedback emails
