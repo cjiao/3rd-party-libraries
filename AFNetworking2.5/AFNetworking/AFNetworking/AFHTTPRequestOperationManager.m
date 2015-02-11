@@ -134,6 +134,20 @@
 }
 
 #pragma mark -
+/*
+ For adding HTMutableRequest operation into the Queue, for POST and PUT
+ */
+- (AFHTTPRequestOperation *)addRequest:(NSURLRequest *)request
+                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self.operationQueue addOperation:operation];
+    
+    return operation;
+}
+
+#pragma mark -
 
 - (AFHTTPRequestOperation *)GET:(NSString *)URLString
                      parameters:(id)parameters
@@ -200,6 +214,33 @@
 
     [self.operationQueue addOperation:operation];
 
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)PUT:(NSString *)URLString
+                     parameters:(NSDictionary *)parameters
+      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSError *serializationError = nil;
+    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"PUT" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
+    if (serializationError) {
+        if (failure) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wgnu"
+            dispatch_async(self.completionQueue ?: dispatch_get_main_queue(), ^{
+                failure(nil, serializationError);
+            });
+#pragma clang diagnostic pop
+        }
+        
+        return nil;
+    }
+    
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self.operationQueue addOperation:operation];
+    
     return operation;
 }
 
