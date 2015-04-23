@@ -209,6 +209,13 @@
                                                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+/*
+ Trusper own method
+ */
+- (AFHTTPRequestOperation *)addRequest:(NSURLRequest *)request
+                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 ///---------------------------
 /// @name Making HTTP Requests
 ///---------------------------
@@ -289,6 +296,16 @@
                      parameters:(id)parameters
                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ multi-part form with PUT request
+ */
+- (AFHTTPRequestOperation *)PUT:(NSString *)URLString
+                     parameters:(NSDictionary *)parameters
+      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 
 /**
  Creates and runs an `AFHTTPRequestOperation` with a `PATCH` request.

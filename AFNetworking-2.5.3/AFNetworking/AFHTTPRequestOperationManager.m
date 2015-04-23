@@ -133,6 +133,20 @@
     return operation;
 }
 
+/*
+ For adding HTMutableRequest operation into the Queue, for POST and PUT
+ */
+- (AFHTTPRequestOperation *)addRequest:(NSURLRequest *)request
+                               success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                               failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self.operationQueue addOperation:operation];
+    
+    return operation;
+}
+
+
 #pragma mark -
 
 - (AFHTTPRequestOperation *)GET:(NSString *)URLString
@@ -212,6 +226,20 @@
 
     [self.operationQueue addOperation:operation];
 
+    return operation;
+}
+
+- (AFHTTPRequestOperation *)PUT:(NSString *)URLString
+                     parameters:(NSDictionary *)parameters
+      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                        success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSError *serializationError = nil;
+    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"PUT" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:success failure:failure];
+    [self.operationQueue addOperation:operation];
+    
     return operation;
 }
 
